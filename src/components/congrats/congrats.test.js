@@ -3,6 +3,8 @@ import { shallow } from "enzyme";
 import Congrats from "./index";
 import { findByTestAttr, checkProps } from "../../../test/testUtils";
 
+const defaultProps = { success: false };
+
 /**
  * Factory function to create a shallowWrapper for the Congrats component
  * @function setup
@@ -11,11 +13,12 @@ import { findByTestAttr, checkProps } from "../../../test/testUtils";
  */
 
 const setup = (props = {}) => {
-  return shallow(<Congrats {...props} />);
+  const setupProps = { ...defaultProps, ...props };
+  return shallow(<Congrats {...setupProps} />);
 };
 
 it("renders without error", () => {
-  const wrapper = setup();
+  const wrapper = setup({ success: false });
   const component = findByTestAttr(wrapper, "component-congrats");
   expect(component.length).toBe(1);
 });
