@@ -1,7 +1,7 @@
 import React from "react";
 import { shallow } from "enzyme";
 import Congrats from "./index";
-import { findByTestAttr } from "../../../test/testUtils";
+import { findByTestAttr, checkProps } from "../../../test/testUtils";
 
 /**
  * Factory function to create a shallowWrapper for the Congrats component
@@ -34,4 +34,9 @@ it("renders no-empty congrats message when `success` prop is true", () => {
 
   const message = findByTestAttr(wrapper, "component-message");
   expect(message.text().length).not.toBe(true);
+});
+
+it("does not throw warning with expected props", () => {
+  const expectProps = { success: false };
+  checkProps(Congrats, expectProps);
 });
